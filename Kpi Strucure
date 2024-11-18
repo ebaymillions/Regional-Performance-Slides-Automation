@@ -1,0 +1,1630 @@
+const KPI_STRUCTURE = {
+    "Nam_Sam": {
+        startSlide: 3,
+        endSlide: 8,
+        sections: {
+            speed: {
+                slideNumber: 3,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        BOS_201: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        BOS_257: {
+                            uph: { row: 4, col: 2 },
+                            p90Qt: { row: 4, col: 3 },
+                            p90Prebin: { row: 4, col: 4 }
+                        },
+                        BOS_139: {
+                            uph: { row: 5, col: 2 },
+                            p90Qt: { row: 5, col: 3 },
+                            p90Prebin: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 6, col: 2, isAverage: true },
+                            p90Qt: { row: 6, col: 3, isAverage: true },
+                            p90Prebin: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 4,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        BOS_201: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        BOS_257: {
+                            oePercent: { row: 4, col: 2 },
+                            oeNum: { row: 4, col: 3 },
+                            foe: { row: 4, col: 4 }
+                        },
+                        BOS_139: {
+                            oePercent: { row: 5, col: 2 },
+                            oeNum: { row: 5, col: 3 },
+                            foe: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 6, col: 2, isAverage: true },
+                            oeNum: { row: 6, col: 3, isAverage: true },
+                            foe: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 5,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        BOS_201: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        BOS_257: {
+                            morPercent: { row: 4, col: 2 },
+                            sldPercent: { row: 4, col: 3 }
+                        },
+                        BOS_139: {
+                            morPercent: { row: 5, col: 2 },
+                            sldPercent: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 6, col: 2, isAverage: true },
+                            sldPercent: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 6,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        BOS_201: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        BOS_257: {
+                            niaPercent: { row: 4, col: 2 },
+                            unitCost: { row: 4, col: 3 }
+                        },
+                        BOS_139: {
+                            niaPercent: { row: 5, col: 2 },
+                            unitCost: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 6, col: 2, isAverage: true },
+                            unitCost: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 7,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        BOS_201: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        BOS_257: {
+                            p90PoDwell: { row: 4, col: 2 },
+                            avgDwell: { row: 4, col: 3 },
+                            inboundUph: { row: 4, col: 4 }
+                        },
+                        BOS_139: {
+                            p90PoDwell: { row: 5, col: 2 },
+                            avgDwell: { row: 5, col: 3 },
+                            inboundUph: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 6, col: 2, isAverage: true },
+                            avgDwell: { row: 6, col: 3, isAverage: true },
+                            inboundUph: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 8,
+                table: {
+                    locations: {
+                        BOS_1178: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        BOS_201: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        BOS_257: {
+                            p90TaskDwell: { row: 4, col: 2 },
+                            avgTaskDwell: { row: 4, col: 3 }
+                        },
+                        BOS_139: {
+                            p90TaskDwell: { row: 5, col: 2 },
+                            avgTaskDwell: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 6, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Katie_Daneau": {
+        startSlide: 10,
+        endSlide: 15,
+        sections: {
+            speed: {
+                slideNumber: 10,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        BOS_266: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        BOS_218: {
+                            uph: { row: 4, col: 2 },
+                            p90Qt: { row: 4, col: 3 },
+                            p90Prebin: { row: 4, col: 4 }
+                        },
+                        BOS_298: {
+                            uph: { row: 5, col: 2 },
+                            p90Qt: { row: 5, col: 3 },
+                            p90Prebin: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 6, col: 2, isAverage: true },
+                            p90Qt: { row: 6, col: 3, isAverage: true },
+                            p90Prebin: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 11,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        BOS_266: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        BOS_218: {
+                            oePercent: { row: 4, col: 2 },
+                            oeNum: { row: 4, col: 3 },
+                            foe: { row: 4, col: 4 }
+                        },
+                        BOS_298: {
+                            oePercent: { row: 5, col: 2 },
+                            oeNum: { row: 5, col: 3 },
+                            foe: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 6, col: 2, isAverage: true },
+                            oeNum: { row: 6, col: 3, isAverage: true },
+                            foe: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 12,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        BOS_266: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        BOS_218: {
+                            morPercent: { row: 4, col: 2 },
+                            sldPercent: { row: 4, col: 3 }
+                        },
+                        BOS_298: {
+                            morPercent: { row: 5, col: 2 },
+                            sldPercent: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 6, col: 2, isAverage: true },
+                            sldPercent: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 13,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        BOS_266: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        BOS_218: {
+                            niaPercent: { row: 4, col: 2 },
+                            unitCost: { row: 4, col: 3 }
+                        },
+                        BOS_298: {
+                            niaPercent: { row: 5, col: 2 },
+                            unitCost: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 6, col: 2, isAverage: true },
+                            unitCost: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 14,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        BOS_266: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        BOS_218: {
+                            p90PoDwell: { row: 4, col: 2 },
+                            avgDwell: { row: 4, col: 3 },
+                            inboundUph: { row: 4, col: 4 }
+                        },
+                        BOS_298: {
+                            p90PoDwell: { row: 5, col: 2 },
+                            avgDwell: { row: 5, col: 3 },
+                            inboundUph: { row: 5, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 6, col: 2, isAverage: true },
+                            avgDwell: { row: 6, col: 3, isAverage: true },
+                            inboundUph: { row: 6, col: 4, isAverage: true }
+                        }
+                    }
+                }
+                },
+            taskDwell: {
+                slideNumber: 15,
+                table: {
+                    locations: {
+                        BOS_166: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        BOS_266: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        BOS_218: {
+                            p90TaskDwell: { row: 4, col: 2 },
+                            avgTaskDwell: { row: 4, col: 3 }
+                        },
+                        BOS_298: {
+                            p90TaskDwell: { row: 5, col: 2 },
+                            avgTaskDwell: { row: 5, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 6, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 6, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Nanaohene_Ofori": {
+        startSlide: 17,
+        endSlide: 22,
+        sections: {
+            speed: {
+                slideNumber: 17,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        HVN_259: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 18,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        HVN_259: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 19,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        HVN_259: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 20,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        HVN_259: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 21,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        HVN_259: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 22,
+                table: {
+                    locations: {
+                        HVN_203: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        HVN_259: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Carlos_Acosta": {
+        startSlide: 24,
+        endSlide: 29,
+        sections: {
+            speed: {
+                slideNumber: 24,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        BOS_823: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 25,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        BOS_823: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 26,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        BOS_823: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 27,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        BOS_823: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 28,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        BOS_823: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 29,
+                table: {
+                    locations: {
+                        PVD_102: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        BOS_823: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Michael_Arilotta": {
+        startSlide: 31,
+        endSlide: 36,
+        sections: {
+            speed: {
+                slideNumber: 31,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        SYR_1545: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 32,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        SYR_1545: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 33,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        SYR_1545: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 34,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        SYR_1545: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 35,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        SYR_1545: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 36,
+                table: {
+                    locations: {
+                        ROC_303: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        SYR_1545: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Ronald_Cruz": {
+        startSlide: 38,
+        endSlide: 43,
+        sections: {
+            speed: {
+                slideNumber: 38,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        LOU_338: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 39,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        LOU_338: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 40,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        LOU_338: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 41,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        LOU_338: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 42,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        LOU_338: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 43,
+                table: {
+                    locations: {
+                        LOU_143: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        LOU_338: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Michael_Rapp": {
+        startSlide: 45,
+        endSlide: 50,
+        sections: {
+            speed: {
+                slideNumber: 45,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        BNA_327: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 46,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        BNA_327: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 47,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        BNA_327: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 48,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        BNA_327: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 49,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        BNA_327: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 50,
+                table: {
+                    locations: {
+                        BNA_91: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        BNA_327: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Ken_Hoskovich": {
+        startSlide: 52,
+        endSlide: 57,
+        sections: {
+            speed: {
+                slideNumber: 52,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        HVN_109: {
+                            uph: { row: 3, col: 2 },
+                            p90Qt: { row: 3, col: 3 },
+                            p90Prebin: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 4, col: 2, isAverage: true },
+                            p90Qt: { row: 4, col: 3, isAverage: true },
+                            p90Prebin: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 53,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        HVN_109: {
+                            oePercent: { row: 3, col: 2 },
+                            oeNum: { row: 3, col: 3 },
+                            foe: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 4, col: 2, isAverage: true },
+                            oeNum: { row: 4, col: 3, isAverage: true },
+                            foe: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 54,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            morPercent: { row: 2,col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        HVN_109: {
+                            morPercent: { row: 3, col: 2 },
+                            sldPercent: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 4, col: 2, isAverage: true },
+                            sldPercent: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 55,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        HVN_109: {
+                            niaPercent: { row: 3, col: 2 },
+                            unitCost: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 4, col: 2, isAverage: true },
+                            unitCost: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 56,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        HVN_109: {
+                            p90PoDwell: { row: 3, col: 2 },
+                            avgDwell: { row: 3, col: 3 },
+                            inboundUph: { row: 3, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 4, col: 2, isAverage: true },
+                            avgDwell: { row: 4, col: 3, isAverage: true },
+                            inboundUph: { row: 4, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 57,
+                table: {
+                    locations: {
+                        HVN_69: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        HVN_109: {
+                            p90TaskDwell: { row: 3, col: 2 },
+                            avgTaskDwell: { row: 3, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 4, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 4, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Christian_Pastor": {
+        startSlide: 59,
+        endSlide: 64,
+        sections: {
+            speed: {
+                slideNumber: 59,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 3, col: 2, isAverage: true },
+                            p90Qt: { row: 3, col: 3, isAverage: true },
+                            p90Prebin: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 60,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 3, col: 2, isAverage: true },
+                            oeNum: { row: 3, col: 3, isAverage: true },
+                            foe: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 61,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 3, col: 2, isAverage: true },
+                            sldPercent: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 62,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 3, col: 2, isAverage: true },
+                            unitCost: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 63,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 3, col: 2, isAverage: true },
+                            avgDwell: { row: 3, col: 3, isAverage: true },
+                            inboundUph: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 64,
+                table: {
+                    locations: {
+                        MEM_252: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 3, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Kelly_Carrillo": {
+        startSlide: 66,
+        endSlide: 71,
+        sections: {
+            speed: {
+                slideNumber: 66,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 3, col: 2, isAverage: true },
+                            p90Qt: { row: 3, col: 3, isAverage: true },
+                            p90Prebin: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 67,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 3, col: 2, isAverage: true },
+                            oeNum: { row: 3, col: 3, isAverage: true },
+                            foe: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 68,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 3, col: 2, isAverage: true },
+                            sldPercent: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 69,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 3, col: 2, isAverage: true },
+                            unitCost: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 70,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 3, col: 2, isAverage: true },
+                            avgDwell: { row: 3, col: 3, isAverage: true },
+                            inboundUph: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 71,
+                table: {
+                    locations: {
+                        BOS_130: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 3, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Shawntrina_Hawkins": {
+        startSlide: 73,
+        endSlide: 78,
+        sections: {
+            speed: {
+                slideNumber: 73,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 3, col: 2, isAverage: true },
+                            p90Qt: { row: 3, col: 3, isAverage: true },
+                            p90Prebin: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 74,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 3, col: 2, isAverage: true },
+                            oeNum: { row: 3, col: 3, isAverage: true },
+                            foe: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 75,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 3, col: 2, isAverage: true },
+                            sldPercent: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 76,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 3, col: 2, isAverage: true },
+                            unitCost: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 77,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 3, col: 2, isAverage: true },
+                            avgDwell: { row: 3, col: 3, isAverage: true },
+                            inboundUph: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 78,
+                table: {
+                    locations: {
+                        LEX_168: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 3, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Mike_Shubert": {
+        startSlide: 80,
+        endSlide: 85,
+        sections: {
+            speed: {
+                slideNumber: 80,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            uph: { row: 2, col: 2 },
+                            p90Qt: { row: 2, col: 3 },
+                            p90Prebin: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            uph: { row: 3, col: 2, isAverage: true },
+                            p90Qt: { row: 3, col: 3, isAverage: true },
+                            p90Prebin: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            orderEdits: {
+                slideNumber: 81,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            oePercent: { row: 2, col: 2 },
+                            oeNum: { row: 2, col: 3 },
+                            foe: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            oePercent: { row: 3, col: 2, isAverage: true },
+                            oeNum: { row: 3, col: 3, isAverage: true },
+                            foe: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            sld: {
+                slideNumber: 82,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            morPercent: { row: 2, col: 2 },
+                            sldPercent: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            morPercent: { row: 3, col: 2, isAverage: true },
+                            sldPercent: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            nia: {
+                slideNumber: 83,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            niaPercent: { row: 2, col: 2 },
+                            unitCost: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            niaPercent: { row: 3, col: 2, isAverage: true },
+                            unitCost: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            },
+            poDwell: {
+                slideNumber: 84,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            p90PoDwell: { row: 2, col: 2 },
+                            avgDwell: { row: 2, col: 3 },
+                            inboundUph: { row: 2, col: 4 }
+                        },
+                        Average: {
+                            p90PoDwell: { row: 3, col: 2, isAverage: true },
+                            avgDwell: { row: 3, col: 3, isAverage: true },
+                            inboundUph: { row: 3, col: 4, isAverage: true }
+                        }
+                    }
+                }
+            },
+            taskDwell: {
+                slideNumber: 85,
+                table: {
+                    locations: {
+                        TYS_147: {
+                            p90TaskDwell: { row: 2, col: 2 },
+                            avgTaskDwell: { row: 2, col: 3 }
+                        },
+                        Average: {
+                            p90TaskDwell: { row: 3, col: 2, isAverage: true },
+                            avgTaskDwell: { row: 3, col: 3, isAverage: true }
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+
+const formatters = {
+    uph: value => {
+        if (value === null || value === undefined) return 'N/A';
+        const numValue = Number(value);
+        if (isNaN(numValue)) return 'N/A';
+        const formatted = Math.round(numValue);
+        return formatted < 0 ? '0' : formatted.toString();
+    },
+    
+    percentage: value => {
+        if (value === null || value === undefined) return 'N/A';
+        const numValue = Number(value);
+        if (isNaN(numValue)) return 'N/A';
+        
+        // Handle values less than 1 (convert from decimal to percentage)
+        let percentValue = numValue;
+        if (numValue < 1 && numValue > 0) {
+            percentValue = numValue * 100;
+        }
+        
+        // Clamp between 0 and 100
+        percentValue = Math.max(0, Math.min(100, percentValue));
+        return `${percentValue.toFixed(1)}%`;
+    },
+    
+    decimal: value => {
+        if (value === null || value === undefined) return 'N/A';
+        const numValue = Number(value);
+        if (isNaN(numValue)) return 'N/A';
+        const formatted = Math.max(0, numValue);
+        return formatted.toFixed(2);
+    }
+};
+
+const validationRules = {
+    integer: {
+        type: "integer",
+        min: 0,
+        required: true,
+        validate: value => {
+            if (value === null || value === undefined) return false;
+            const numValue = Number(value);
+            return !isNaN(numValue) && Number.isInteger(numValue) && numValue >= 0;
+        }
+    },
+    percentage: {
+        type: "percentage",
+        min: 0,
+        max: 100,
+        required: true,
+        validate: value => {
+            if (value === null || value === undefined) return false;
+            const numValue = Number(value);
+            return !isNaN(numValue) && numValue >= 0 && numValue <= 100;
+        }
+    },
+    decimal: {
+        type: "decimal",
+        min: 0,
+        required: true,
+        validate: value => {
+            if (value === null || value === undefined) return false;
+            const numValue = Number(value);
+            return !isNaN(numValue) && numValue >= 0;
+        }
+    }
+};
+
+function getKPIStructure() {
+    return KPI_STRUCTURE;
+}
+
+function getFormatters() {
+    return formatters;
+}
+
+function getValidationRules() {
+    return validationRules;
+}
