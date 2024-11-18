@@ -1,0 +1,134 @@
+const BASE_URL = 'https://gopuff.looker.com/api/4.0';
+const CLIENT_ID = PropertiesService.getScriptProperties().getProperty('cli');
+const CLIENT_SECRET = PropertiesService.getScriptProperties().getProperty('sec');
+
+function login() {
+    try {
+        var post = {
+            'method': 'post'
+        };
+        var response = UrlFetchApp.fetch(BASE_URL + "/login?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET, post);
+        return JSON.parse(response.getContentText()).access_token;
+    } catch(err) {
+        return "Could not login to Looker. " + err;
+    }
+}
+
+function LOOKER_GET_DASHBOARD(dashboardId, filters) {
+    try {
+        const token = login();
+        if (typeof token === 'string' && token.startsWith('Could not login')) {
+            Logger.log('Login failed:', token);
+            return null;
+        }
+
+        // First get the dashboard to get the query ID
+        let dashboardUrl = `${BASE_URL}/dashboards/${dashboardId}`;
+        const dashboardOptions = {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json'
+            },
+            method: 'GET',
+            muteHttpExceptions: true
+        };
+
+        const dashboardResponse = UrlFetchApp.fetch(dashboardUrl, dashboardOptions);
+        if (dashboardResponse.getResponseCode() !== 200) {
+            Logger.log(`Error fetching dashboard: ${dashboardResponse.getContentText()}`);
+            return null;
+        }
+
+        const dashboard = JSON.parse(dashboardResponse.getContentText());
+        if (!dashboard.dashboard_elements || dashboard.dashboard_elements.length === 0) {
+            Logger.log('No dashboard elements found');
+            return null;
+        }
+
+        // Get the first query ID from the dashboard
+        const queryId = dashboard.dashboard_elements[0].query_id;
+        if (!queryId) {
+            Logger.log('No query ID found in dashboard');
+            return null;
+        }
+
+        // Now run the query to get the actual data in CSV format
+        let queryUrl = `${BASE_URL}/queries/${queryId}/run/csv`;
+        if (filters && Object.keys(filters).length > 0) {
+            const queryString = Object.entries(filters)
+                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                .join('&');
+            queryUrl += `?${queryString}`;
+        }
+
+        const queryOptions = {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'text/csv'
+            },
+            method: 'GET',
+            muteHttpExceptions: true
+        };
+
+        const queryResponse = UrlFetchApp.fetch(queryUrl, queryOptions);
+        if (queryResponse.getResponseCode() !== 200) {
+            Logger.log(`Error running query: ${queryResponse.getContentText()}`);
+            return null;
+        }
+
+        return queryResponse.getContentText();
+
+    } catch (err) {
+        Logger.log('Error in LOOKER_GET_DASHBOARD:', err);
+        return null;
+    }
+}
+function LOOKER_RUN_QUERY(queryId, params) {
+    try {
+        const token = login();
+        if (typeof token === 'string' && token.startsWith('Could not login')) {
+            Logger.log('Login failed:', token);
+            return token;
+        }
+
+        let url = `${BASE_URL}/queries/${queryId}/run/json`;
+        if (Object.keys(params).length > 0) {
+            const queryString = Object.entries(params)
+                .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+                .join('&');
+            url += `?${queryString}`;
+        }
+
+        const options = {
+            url: url,
+            headers: {
+                'content-type': 'application/json',
+                "Authorization": "token " + token
+            },
+            method: 'get',
+            muteHttpExceptions: true,
+            mode: 'cors'
+        };
+
+        const response = UrlFetchApp.fetch(url, options);
+        const responseText = response.getContentText();
+        const responseCode = response.getResponseCode();
+
+        if (responseCode !== 200) {
+            Logger.log(`Error from Looker API for query ${queryId}: ${responseText}`);
+            return null;
+        }
+
+        try {
+            const jsonData = JSON.parse(responseText);
+            return transformLookerData(jsonData);
+        } catch (parseErr) {
+            Logger.log(`Error parsing JSON for query ${queryId}: ${parseErr}`);
+            return null;
+        }
+
+    } catch (err) {
+        Logger.log('Error in LOOKER_RUN_QUERY:', err);
+        return "Please check your API credentials and that your query exists!";
+    }
+}
