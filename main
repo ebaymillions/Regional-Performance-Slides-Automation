@@ -1,0 +1,348 @@
+// ===== Constants and Configurations =====
+const METRIC_MAPPINGS = {
+    'uph': ['LBI PPR OA-Level LBI Total UPH Units Per Hour', 'Total UPH', 'Units Per Hour'],
+    'p90Qt': ['Wms Task Services P90 Dwell Time Hours', 'P90 Dwell Time', 'P90 Queue Time'],
+    'p90PoDwell': ['Inbound Orders PO Inbound Dwell Hours', 'PO Dwell Time', 'P90 PO Dwell'],
+    'oePercent': ['Order Edits Percent', 'OE Percent', 'Order Edit %'],
+    'oeNum': ['Order Edits Number', 'OE Count', 'Order Edits'],
+    'foe': ['Failed Order Edits', 'FOE Count', 'Failed OE'],
+    'morPercent': ['MOR Percent', 'MOR %'],
+    'sldPercent': ['SLD Percent', 'SLD %'],
+    'niaPercent': ['NIA Percent', 'NIA %'],
+    'unitCost': ['Unit Cost', 'Cost Per Unit'],
+    'avgDwell': ['Avg Dwell', 'Average Dwell Time'],
+    'inboundUph': ['Inbound UPH', 'Inbound Units Per Hour'],
+    'p90TaskDwell': ['P90 Task Dwell', 'Task P90 Dwell Time'],
+    'avgTaskDwell': ['Avg Task Dwell', 'Average Task Dwell Time'],
+    'locationNameFields': [
+        'Locations Location Name',
+        'Inbound Orders Location Name',
+        'Location Name',
+        'Site Name',
+        'Facility Name',
+        'Location ID',
+        'Site ID',
+        'Facility ID'
+    ]
+};
+
+const SLIDE_ID = '14qgub3_LMWfEFIqwcytjct_1ZbVUzA1V5kSZWoAo8u4';
+const NOTIFICATION_EMAIL = 'christian.pastor@gopuff.com';
+const DASHBOARD_ID = '10442';
+const DASHBOARD_FILTERS = {
+   'Ops Local Date': '3 day ago for 3 day',
+   'Regional Manager (I)': 'Eric Clarke',
+   'Location ID': '',
+   'Proxy': ''
+};
+
+// ===== Main System Functions =====
+function startSystem() {
+   try {
+       logMessage('Starting system initialization');
+      
+       // Access presentation
+       const presentation = SlidesApp.openById(SLIDE_ID);
+       if (!presentation) {
+           throw new Error(`Unable to access presentation with ID: ${SLIDE_ID}`);
+       }
+       logMessage('Presentation accessed successfully');
+      
+       // Setup triggers
+       setupTriggers();
+       logMessage('Triggers set up successfully');
+      
+       // Update metrics
+       updateMetrics();
+       logMessage('Initial metrics update completed successfully');
+      
+       MailApp.sendEmail({
+           to: NOTIFICATION_EMAIL,
+           subject: 'Performance Review System Initialized',
+           body: 'The performance review system has been successfully initialized and is now running on schedule.'
+       });
+      
+   } catch (error) {
+       notifyError('System Start', error);
+       throw error;
+   }
+}
+
+function validateMetricMappings(headers) {
+    const unmappedMetrics = [];
+    const mappedMetrics = [];
+    
+    headers.forEach(header => {
+        let found = false;
+        for (const [metricKey, possibleNames] of Object.entries(METRIC_MAPPINGS)) {
+            if (possibleNames.some(name => header.toLowerCase().includes(name.toLowerCase()))) {
+                found = true;
+                mappedMetrics.push({
+                    header: header,
+                    mappedTo: metricKey
+                });
+                break;
+            }
+        }
+        if (!found) {
+            unmappedMetrics.push(header);
+        }
+    });
+    
+    logMessage('Metric Mapping Analysis:', {
+        'Successfully Mapped': mappedMetrics,
+        'Unmapped Headers': unmappedMetrics
+    });
+    
+    return { mappedMetrics, unmappedMetrics };
+}
+
+function updateMetrics() {
+    try {
+        const presentation = SlidesApp.openById(SLIDE_ID);
+        logMessage('Presentation opened successfully');
+
+        const csvData = LOOKER_GET_DASHBOARD(DASHBOARD_ID, DASHBOARD_FILTERS);
+        if (!csvData) {
+            throw new Error('Failed to export Looker dashboard data');
+        }
+
+        const transformedData = parseLookerCSV(csvData);
+        if (!transformedData) {
+            throw new Error('Failed to parse Looker CSV data');
+        }
+
+        logMessage('Starting metrics update for KPI structure');
+        Object.entries(getKPIStructure()).forEach(([managerName, managerStructure]) => {
+            try {
+                processManagerMetrics(managerName, managerStructure, presentation, transformedData);
+            } catch (error) {
+                logMessage(`Error processing manager ${managerName}: ${error.message}`);
+                notifyError(`Manager Processing - ${managerName}`, error);
+            }
+        });
+
+    } catch (error) {
+        logMessage(`Error in updateMetrics: ${error.message}`);
+        throw error;
+    }
+}
+
+function parseLookerCSV(csvData) {
+    try {
+        const rows = Utilities.parseCsv(csvData);
+        const headers = rows[0];
+        
+        // Enhanced debug logging
+        logMessage('CSV Analysis:', {
+            'Total Rows': rows.length,
+            'Headers': headers,
+            'Sample Row Data': rows.slice(1, 3).map(row => {
+                let rowObj = {};
+                headers.forEach((header, index) => {
+                    rowObj[header] = row[index];
+                });
+                return rowObj;
+            })
+        });
+
+        // Log available metrics
+        const availableMetrics = headers.filter(header => 
+            Object.values(METRIC_MAPPINGS).flat().some(mapping => 
+                header.toLowerCase().includes(mapping.toLowerCase())
+            )
+        );
+        logMessage('Available metrics in CSV:', availableMetrics);
+
+        // ... rest of the function
+    } catch (error) {
+        logMessage(`Error in parseLookerCSV: ${error.message}`);
+        return null;
+    }
+}
+
+function processManagerMetrics(managerName, managerStructure, presentation, transformedData) {
+   logMessage(`Processing metrics for manager: ${managerName}`);
+
+   Object.entries(managerStructure.sections).forEach(([sectionKey, section]) => {
+       try {
+           const slide = presentation.getSlides()[section.slideNumber - 1];
+           if (!slide) {
+               throw new Error(`Slide ${section.slideNumber} not found for manager ${managerName}`);
+           }
+
+           updateSlideMetrics(slide, section, managerName, transformedData);
+       } catch (error) {
+           logMessage(`Error processing section ${sectionKey} for manager ${managerName}: ${error.message}`);
+       }
+   });
+}
+
+function updateSlideMetrics(slide, section, managerName, transformedData) {
+   try {
+       logMessage(`Starting to update metrics for manager: ${managerName}`);
+       const tables = slide.getTables();
+       if (!tables || tables.length === 0) {
+           throw new Error(`No tables found on slide for manager ${managerName}`);
+       }
+
+       const table = tables[0];
+       const locations = section.table.locations;
+       logMessage(`Processing ${Object.keys(locations).length} locations for manager ${managerName}`);
+
+       Object.entries(locations).forEach(([locationName, metrics]) => {
+           if (locationName === 'Average') return;
+
+           logMessage(`Processing location: ${locationName} for manager ${managerName}`);
+           Object.entries(metrics).forEach(([metricName, position]) => {
+               try {
+                   const metricData = transformedData[locationName]?.[metricName];
+                   if (!metricData) {
+                       logMessage(`No metric data found for ${metricName} and location ${locationName}`);
+                       return;
+                   }
+
+                   const cell = table.getCell(position.row - 1, position.col - 1);
+                   const value = metricData.value;
+                   logMessage(`Raw value for ${metricName} and location ${locationName}: ${value}`);
+
+                   const formattedValue = formatMetricValue(value, metricName, getFormatters());
+                   logMessage(`Formatted value for ${metricName} and location ${locationName}: ${formattedValue}`);
+                   cell.getText().setText(formattedValue);
+               } catch (metricError) {
+                   logMessage(`Error updating ${metricName} for ${locationName} and manager ${managerName}: ${metricError.message}`);
+               }
+           });
+       });
+
+       updateAverages(table, locations, transformedData);
+       logMessage(`Slide metrics update completed for manager ${managerName}`);
+   } catch (error) {
+       logMessage(`Error updating slide metrics for manager ${managerName}: ${error.message}`);
+       throw error;
+   }
+}
+
+function updateAverages(table, locations, transformedData) {
+   const averageConfig = locations['Average'];
+   if (!averageConfig) {
+       logMessage('No average configuration found');
+       return;
+   }
+
+   Object.entries(averageConfig).forEach(([metricName, position]) => {
+       if (!position.isAverage) return;
+
+       let sum = 0;
+       let count = 0;
+
+       Object.entries(locations).forEach(([locName, metrics]) => {
+           if (locName !== 'Average' && transformedData[locName]?.[metricName]) {
+               try {
+                   const value = transformedData[locName][metricName].value;
+                   sum += value;
+                   count++;
+               } catch (error) {
+                   logMessage(`Error reading data for ${locName} ${metricName}: ${error.message}`);
+               }
+           }
+       });
+
+       if (count > 0) {
+           try {
+               const average = sum / count;
+               const averageCell = table.getCell(position.row - 1, position.col - 1);
+               averageCell.getText().setText(formatMetricValue(average, metricName, getFormatters()));
+           } catch (error) {
+               logMessage(`Error updating average for ${metricName}: ${error.message}`);
+           }
+       }
+   });
+}
+
+function setupTriggers() {
+   try {
+       // Remove any existing triggers
+       ScriptApp.getProjectTriggers().forEach(trigger => ScriptApp.deleteTrigger(trigger));
+
+       // Set up new weekly trigger for Monday at 5am
+       ScriptApp.newTrigger('updateMetrics')
+           .timeBased()
+           .onWeekDay(ScriptApp.WeekDay.MONDAY)
+           .atHour(5)
+           .create();
+
+       logMessage('Triggers set up successfully');
+   } catch (error) {
+       notifyError('Trigger Setup', error);
+   }
+}
+
+function notifyError(context, error) {
+   logMessage(`${context} Error: ${error.message}`);
+  
+   MailApp.sendEmail({
+       to: NOTIFICATION_EMAIL,
+       subject: `Error in ${context}`,
+       body: `An error occurred in the "${context}" context:\n\n${error.message}`
+   });
+}
+
+function formatMetricValue(value, metricType, formatters) {
+   if (value === null || value === undefined) {
+       return 'N/A';
+   }
+
+   if (metricType.includes('Percent')) {
+       return formatters.percentage(value);
+   } else if (metricType === 'uph' || metricType === 'oeNum') {
+       return formatters.uph(value);
+   } else {
+       return formatters.decimal(value);
+   }
+}
+
+function logMessage(message, ...args) {
+   console.log(message, ...args);
+}
+
+
+
+
+function transformMetrics(row, headers, locationName) {
+    const metrics = {};
+    
+    // Log the raw data for this location
+    logMessage(`Processing metrics for ${locationName}:`, {
+        'Raw Data': row.map((value, index) => ({
+            [headers[index]]: value
+        }))
+    });
+    
+    // Try to match each metric
+    Object.entries(METRIC_MAPPINGS).forEach(([metricKey, possibleNames]) => {
+        let found = false;
+        for (const name of possibleNames) {
+            const index = headers.findIndex(h => 
+                h.toLowerCase().includes(name.toLowerCase())
+            );
+            if (index !== -1) {
+                const value = row[index];
+                metrics[metricKey] = parseFloat(value);
+                found = true;
+                logMessage(`Found metric ${metricKey}:`, {
+                    'Header': headers[index],
+                    'Raw Value': value,
+                    'Parsed Value': metrics[metricKey]
+                });
+                break;
+            }
+        }
+        if (!found) {
+            logMessage(`No match found for metric: ${metricKey}`);
+        }
+    });
+    
+    return metrics;
+}
+
